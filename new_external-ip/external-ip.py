@@ -1,6 +1,10 @@
 import requests
 from datetime import datetime
 
+# check if a file called cfg.cfg exists, if it does not exists, exit the program
+try:
+    with open('cfg.cfg', 'r') as cfg_file:
+        pass
 
 # Make a request to an API that returns the external IP
 response = requests.get('https://api.ipify.org?format=json')
