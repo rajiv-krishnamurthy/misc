@@ -1,10 +1,19 @@
 import requests
 from datetime import datetime
 
-# check if a file called cfg.cfg exists, if it does not exists, exit the program
-try:
+#check if a file called ./cfg.cfg exists, if not exit the program. If the file exists, read the first line and if that directory does not exists then exit the program
+try:    
     with open('cfg.cfg', 'r') as cfg_file:
-        pass
+        file_path = cfg_file.read().strip()
+        try:
+            with open(file_path, 'w') as file:
+                pass
+        except FileNotFoundError:
+            print(f"File path {file_path} does not exist.")
+            exit(1) 
+except FileNotFoundError:
+    print(f"This script expects a file cfg.cfg in the same directory, it does not exist.")
+    exit(1)    
 
 # Make a request to an API that returns the external IP
 response = requests.get('https://api.ipify.org?format=json')
